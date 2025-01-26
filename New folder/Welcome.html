@@ -4,66 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome_page</title>
+    <title>Welcome</title>
     <style>
-        *{
+        * {
             margin: 0;
             padding: 0;
         }
-        body{
-            background-color: rgb(0, 36, 86);
+
+        body {
+            background-color: rgb(0, 0, 0);
         }
+
         #one {
-           
-            background-image: url('snow-layer-winter-sunny-day-beautiful.jpg');
+            background: 
+                linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(144, 255, 244, 0.584)), 
+                url('snow-layer-winter-sunny-day-beautiful.jpg');
             width: 100vw;
             height: 50vh;
-            background-repeat:no-repeat ;
+            background-repeat: no-repeat;
             background-size: cover;
-            display: flex;
-            background-color: linear-gradient(to bottom,rgba(255, 255, 255, 0),black);
-            background-attachment: fixed,scroll;
+            background-attachment: fixed;
         }
 
-        #two { background-color: bisque;
+        #two {
+            background-color: bisque;
             width: 100vw;
             height: 50vh;
-            background-repeat:no-repeat ;
+            background-repeat: no-repeat;
             background-size: cover;
-        text-align: center;
-    font-size: xx-large;
-;}
+            text-align: center;
+            font-size: xx-large;
+        }
 
-        #three {  
-            background-image: url('winter-beautiful-night-forest.jpg');
-        width: 100vw;
+        #three {
+            background: 
+                linear-gradient(to bottom, rgb(33, 0, 45), rgba(0, 0, 0, 0)), 
+                url('winter-beautiful-night-forest.jpg');
+            width: 100vw;
             height: 150vh;
-            background-repeat:no-repeat ;
+            background-repeat: no-repeat;
             background-size: cover;
-            background-color: linear-gradient(to bottom,rgb(255, 255, 255),rgba(0, 0, 0, 0));
-        background-attachment: fixed,scroll;}
-           #name{
-                position: relative;
-                left: 65px;
-top: 89px;
-            }
-         
+            background-attachment: fixed;
+        }
+
+        #name {
+            position: relative;
+            left: 55px;
+            top: 89px;
+        }
     </style>
 </head>
 
 <body>
     <div class="classname">
-        <div id="one"></div><div id="two">
-            <a id="name" href="Weatherat.html" style="color: rgb(255, 179, 0); text-decoration: none;">Have a beautiful day</a>
-
+        <div id="one"></div>
+        <div id="two">
+            <a id="name" href="Weatherat.html" style="color: rgb(255, 179, 0); text-decoration: none;">
+                Have a beautiful day
+            </a>
         </div>
-     
         <div id="three"></div>
         <br>
         <div id="four"></div>
         <br>
     </div>
-
+   
 </body>
 
 </html>

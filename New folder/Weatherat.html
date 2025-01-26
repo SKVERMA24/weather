@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7Timer Weather Data</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, rgb(0, 35, 75), rgb(0, 191, 255));
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #box {
+            position: relative;
+           border-radius: 8px;
+            text-align: center;
+            width: 350px;
+            padding: 20px;
+            background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(0, 191, 255));
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 80%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ffaa00;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3cff00;
+        }
+        .output { display: flex;
+            justify-content: space-evenly ;
+            margin-top: 20px;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+        .error {
+            color: red;
+        }
+      
+        .wear{
+  font-family: "Amatic SC", serif;
+  font-weight: 900;
+  font-style: normal;
+
+}
+
+.playfair-display-lat {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 590;
+  font-style: normal;
+}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h1 class="wear">Weather Data</h1>
+        <form id="weatherForm">
+            <label class="lat" for="latitude">Latitude:</label>
+            <input type="number" step="any" id="latitude" name="latitude" placeholder="Enter latitude" required>
+            <br>
+            <label class="lon" for="longitude">Longitude:</label>
+            <input type="number" step="any" id="longitude" name="longitude" placeholder="Enter longitude" required>
+            <br>
+            <button type="submit">Get Weather Data</button>
+        </form>
+
+    <div class="output" id="output"> </div>
+
+    <script>
+        document.getElementById('weatherForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var latitude = document.getElementById('latitude').value;
+            var longitude = document.getElementById('longitude').value;
+            var apiUrl = `https://www.7timer.info/bin/api.pl?lon=${longitude}&lat=${latitude}&product=civil&output=json`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.dataseries) {
+                        let outputHtml = `<h2>Weather Forecast</h2>`;
+                        data.dataseries.forEach((forecast, index) => {
+                            outputHtml += `
+                                <p><strong>Day ${index + 1}:</strong> 
+                                Temperature: ${forecast.temp2m}°C, 
+                                Weather: ${forecast.temp2m > 15 ? 'Warm' : 'Cold'}</p>
+                            `;
+                        });
+                        document.getElementById('output').innerHTML = outputHtml;
+                    } else {
+                        document.getElementById('output').innerHTML = `<p class="error">Failed to fetch weather data. Please check the coordinates.</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                    document.getElementById('output').innerHTML = `<p class="error">Failed to retrieve weather data. Please try again later.</p>`;
+                });
+        });
+    </script>
+</body>
+</html>
